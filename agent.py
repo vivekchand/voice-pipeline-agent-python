@@ -57,9 +57,13 @@ async def entrypoint(ctx: JobContext):
 
 
 if __name__ == "__main__":
-    cli.run_app(
-        WorkerOptions(
-            entrypoint_fnc=entrypoint,
-            prewarm_fnc=prewarm,
-        ),
-    )
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "start":
+        cli.run_app(
+            WorkerOptions(
+                entrypoint_fnc=entrypoint,
+                prewarm_fnc=prewarm,
+            ),
+        )
+    else:
+        print("Usage: python3 agent.py start")
